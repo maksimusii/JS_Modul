@@ -6,22 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datetime superapp</title>
     <script src="./src/main.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js"></script>
 </head>
 
 <body>
-    <form id="datecalc">
-        <h3>Калькулятор дат</h3>
-        <label>
-            <strong>Первая дата:</strong>
-            <input type="date" name="firstDate" />
-        </label>
-        <label>
-            <strong>Вторая дата:</strong>
-            <input type="date" name="secondDate" />
-        </label>
-        <button type="submit">Расчитать промежуток</button>
-        <p id="datecalc__result"></p>
-    </form>
+    <button id="calcdatebutton">Калькулятор дат</button>
+    <button id="timerbutton">Таймер</button>
+    <div id="calc_date" >
+        <form id="datecalc">
+            <h3>Калькулятор дат</h3>
+            <label>
+                <strong>Первая дата:</strong>
+                <input type="date" name="firstDate" />
+            </label>
+            <label>
+                <strong>Вторая дата:</strong>
+                <input type="date" name="secondDate" />
+            </label>
+            <button type="submit">Старт</button>
+            <p id="datecalc__result"></p>
+        </form>
+    </div>
+    <div style="display: none" id="timer">
+        <form id="datetimer">
+            <h3>Таймер</h3>
+            <label>
+                <strong>Значение таймера</strong>
+                <input type="time" name="datetimer" step="1" value="00:00:00"/>
+            </label>
+            
+            <button type="submit" id="timerstart">Старт</button>
+            <button type="submit" id="timerstop">Стоп</button>
+            <p id="timervalue"></p>
+        </form>
+    </div>
+
 </body>
 
 </html>
