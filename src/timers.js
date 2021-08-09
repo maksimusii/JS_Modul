@@ -9,22 +9,27 @@ let sound = new Howl({
   }
 });
 
-const timerValue = document.getElementById("timervalue");
+let timerValue = document.getElementById("timervalue");
 
 let timerEl;
 
 export function handleTimerStart(event) {
-   
+    clearInterval(timerEl);
     event.preventDefault();
     let timerDateValue = (event.target.form[0].value).split(':');
-    let timerDate  = DateTime.local().plus({hours: timerDateValue[0], minutes: timerDateValue[1], seconds: timerDateValue[2]});
+    let timerDate  = DateTime.local().plus({hours: timerDateValue[0], minutes: timerDateValue[1], seconds: 2 + +timerDateValue[2]});
     console.log(event.target.id)
     timerEl = setInterval(function() {
         let delta = timerDate.diff(DateTime.local()).shiftTo('hours', 'minutes', 'seconds', 'milliseconds')
-        let {hours: h, minutes: m, seconds: s} = delta;
-        if(h == 0 && m == 0 && s == 0) stopTimer();
-        timerValue.innerHTML = `${h} часов ${m} минут ${s} секунд`;
+        let {hours: h, minutes: m, seconds: s } = delta;
+        if(h <= 0 && m <= 0 && s <= 0) {
+          stopTimer()
+        } else {
+          timerValue.innerHTML = `${h} часов ${m} минут ${s} секунд`;
+        }
+        
     }, 1000)
+    
     }
 
 export function handleTimerStop(event) { 
@@ -35,6 +40,6 @@ export function handleTimerStop(event) {
 
 function stopTimer() {
   clearInterval(timerEl);
+  timerValue.innerHTML = 'Таймер завершен!!'
   sound.play('blast');
- 
-} 
+}
